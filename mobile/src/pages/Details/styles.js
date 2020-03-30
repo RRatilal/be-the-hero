@@ -1,78 +1,76 @@
-import { StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 import Constants from 'expo-constants'
 
-export default StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 24,
-        paddingTop: Constants.statusBarHeight + 20
-    },
+export const Container = styled.View`
+    flex: 1;
+    padding: 0 24px;
+    padding-top: ${Constants.statusBarHeight + 20}px;
+    background-color: ${props => props.theme.colors.background}
+`;
 
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+export const Header = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+`;
 
-    incident: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        marginBottom: 16,
-        marginTop: 48
-    },
+export const Incident = styled.View`
+    padding: 24px;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors.incidentBackground};
+    margin-bottom: 16px;
+    margin-top: 48px
+`
+export const IncidentProperty = styled.Text`
+    font-size: 14px;
+    color: ${props => props.theme.colors.property};
+    font-weight: bold;
+    margin-top: 24px;
+`
 
-    incidentProperty: {
-        fontSize: 14,
-        color: '#41414d',
-        fontWeight: 'bold',
-        marginTop: 24
-    },
+export const IncidentValue = styled.Text`
+    margin-top: 8px;
+    font-size: 15px;
+    color: ${props => props.theme.colors.normalText};
+`
 
-    incidentValue: {
-        marginTop: 8,
-        fontSize: 15,
-        color: '#737380'
-    },
+export const ContentBox = styled.View`
+    padding: 24px;
+    border-radius: 8px;
+    background-color:${props => props.theme.colors.incidentBackground};
+    margin-bottom: 16px;
+`
 
-    contentBox: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        marginBottom: 16,
-    },
+export const HeroTitle = styled.Text`
+    font-weight: bold;
+    font-size: 20px;
+    color: ${props => props.theme.colors.title};
+    line-height: 30px
+`
 
-    heroTitle: {
-        fontWeight: 'bold',
-        fontSize: 20,
-        color: "#13131a",
-        lineHeight: 30
-    },
+export const HeroDescription = styled.Text`
+    font-size: 16px;
+    color: ${props => props.theme.colors.normalText};
+    margin-top: 16px;
+`
 
-    heroDescription: {
-        fontSize: 16,
-        color: '#737380',
-        marginTop: 16
-    },
+export const Actions = styled.View`
+    margin-top: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+`
 
-    actions: {
-        marginTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
+export const Action = styled.TouchableOpacity`
+    background-color: #e02041;
+    border-radius: 8px;
+    height: 50px;
+    width: 48%;
+    justify-content: center;
+    align-items: center;
+`
 
-    action: {
-        backgroundColor: '#e02041',
-        borderRadius: 8,
-        height: 50,
-        width: '48%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    actionText: {
-        color: '#fff',
-        fontSize: 15,
-        fontWeight: 'bold',
-    }
-})
+export const ActionText = styled.Text`
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+`

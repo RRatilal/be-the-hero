@@ -1,19 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux'
 
 import api from '../../services/api';
 
 import logoImg from '../../assets/logo.png';
 
-import styles from './styles';
+import {
+    Container,
+    Header,
+    HeaderRight,
+    HeaderRightButton,
+    HeaderText,
+    HeaderTextBold,
+    Title,
+    Description,
+    DetailsButton,
+    DetailsButtonText,
+    Incident,
+    IncidentList,
+    IncidentProperty,
+    IncidentValue,
+    ThemeView
+} from './styles';
+import { actions } from '../../actions/themeActions';
 
 export default function Incidents() {
     const [incidents, setIncidents] = useState([]);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [opacity, setOpacity] = useState(0);
+    const dispasth = useDispatch();
 
     const navigation = useNavigation();
 
@@ -42,52 +62,71 @@ export default function Incidents() {
         setLoading(false);
     }
 
+    function handleOpenMore() {
+        return opacity === 0 ? setOpacity(1) : setOpacity(0);
+    }
+
     useEffect(() => {
+        // console.log(route)
         loadIncidents();
     }, [])
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
+        < Container >
+            <Header>
                 <Image source={logoImg} />
-                <Text style={styles.headerText}>
-                    Total de <Text style={styles.headerTextBold}>{total} casos</Text>
-                </Text>
-            </View>
 
-            <Text style={styles.title}>Bem-vindo!</Text>
-            <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia</Text>
+                <HeaderRight>
+                    <HeaderText>
+                        Total de <HeaderTextBold >{total} casos</HeaderTextBold>
+                    </HeaderText>
+                    <HeaderRightButton
+                        onPress={handleOpenMore}
+                    >
+                        <Feather name="more-vertical" size={18} color="#737380" />
+                    </HeaderRightButton>
+                    <ThemeView style={{ opacity }}>
+                        <TouchableOpacity
+                            onPress={() => dispasth({ type: 'TOGGLE_THEME' })}
+                        >
+                            <Text style={{ fontSize: 15, fontWeight: "bold" }}>Theme</Text>
+                        </TouchableOpacity>
+                    </ThemeView>
+                </HeaderRight>
+            </Header>
 
-            <FlatList
+            <Title>Bem-vindo!</Title>
+            <Description>Escolha um dos casos abaixo e salve o dia</Description>
+
+            <IncidentList
                 data={incidents}
-                style={styles.incidentList}
                 keyExtractor={incident => String(incident.id)}
                 showsVerticalScrollIndicator={false}
                 onEndReached={loadIncidents}
                 onEndReachedThreshold={0.2}
                 renderItem={({ item: incident }) => (
-                    <View style={styles.incident}>
-                        <Text style={styles.incidentProperty}>ONG:</Text>
-                        <Text style={styles.incidentValue}>{incident.name}</Text>
+                    <Incident>
+                        <IncidentProperty>ONG:</IncidentProperty>
+                        <IncidentValue>{incident.name}</IncidentValue>
 
-                        <Text style={styles.incidentProperty}>CASO:</Text>
-                        <Text style={styles.incidentValue}>{incident.title}</Text>
+                        <IncidentProperty>CASO:</IncidentProperty>
+                        <IncidentValue>{incident.title}</IncidentValue>
 
-                        <Text style={styles.incidentProperty}>Valor:</Text>
-                        <Text style={styles.incidentValue}>
+                        <IncidentProperty>Valor:</IncidentProperty>
+                        <IncidentValue>
                             {Intl.NumberFormat('pt-MZ', { style: 'currency', currency: 'MZN' }).format(incident.value)}
-                        </Text>
+                        </IncidentValue>
 
-                        <TouchableOpacity
-                            style={styles.detailsButton}
+                        <DetailsButton
                             onPress={() => navigateToDetails(incident)}
                         >
-                            <Text style={styles.detailsButtonText}>Ver mais detalhes</Text>
+                            <DetailsButtonText>Ver mais detalhes</DetailsButtonText>
                             <Feather name="arrow-right" size={16} color="#e02041" />
-                        </TouchableOpacity>
-                    </View>
+                        </DetailsButton>
+                    </Incident>
                 )}
             />
-        </View>
+        </Container >
     );
 }
+

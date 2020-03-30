@@ -1,75 +1,99 @@
-import { StyleSheet } from 'react-native';
-import Constants from 'expo-constants'
+import styled from 'styled-components/native';
+import Constants from 'expo-constants';
 
-export default StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingHorizontal: 24,
-        paddingTop: Constants.statusBarHeight + 20
-    },
+export const Container = styled.View`
+    flex: 1;
+    padding: 0 24px;
+    padding-top: ${Constants.statusBarHeight + 20}px;
+    background-color: ${props => props.theme.colors.background}
+`;
 
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+export const Header = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+`;
 
-    headerText: {
-        fontSize: 15,
-        color: '#737380'
-    },
+export const HeaderText = styled.Text`
+    font-size: 15px;
+    color: ${props => props.theme.colors.normalText};
+`;
 
-    headerTextBold: {
-        fontWeight: 'bold',
-    },
+export const HeaderRight = styled.View`
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between
+`;
 
-    title: {
-        fontSize: 30,
-        marginBottom: 16,
-        marginTop: 48,
-        color: '#13131a',
-        fontWeight: 'bold'
-    },
+export const HeaderRightButton = styled.TouchableOpacity`
+    margin-left: 8px
+`;
 
-    description: {
-        fontSize: 16,
-        lineHeight: 24,
-        color: '#737380'
-    },
+export const HeaderTextBold = styled.Text`
+    font-weight: bold;
+`;
 
-    incidentList: {
-        marginTop: 32,
-    },
+export const Title = styled.Text`
+    font-size: 30px;
+    margin-bottom: 16px;
+    margin-top: 48px;
+    color: ${props => props.theme.colors.title};
+    font-weight: bold;
+`
 
-    incident: {
-        padding: 24,
-        borderRadius: 8,
-        backgroundColor: '#fff',
-        marginBottom: 16
-    },
+export const Description = styled.Text`
+    font-size: 16px;
+    line-height: 24px;
+    color: ${props => props.theme.colors.normalText};
+`
 
-    incidentProperty: {
-        fontSize: 14,
-        color: '#41414d',
-        fontWeight: 'bold',
-    },
+export const IncidentList = styled.FlatList`
+    margin-top: 32px;
+`
 
-    incidentValue: {
-        marginTop: 8,
-        fontSize: 15,
-        marginBottom: 24,
-        color: '#737380'
-    },
+export const Incident = styled.View`
+    padding: 24px;
+    border-radius: 8px;
+    background-color: ${props => props.theme.colors.incidentBackground};
+    margin-bottom: 16px
+`
 
-    detailsButton: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+export const IncidentProperty = styled.Text`
+    font-size: 14px;
+    color: ${props => props.theme.colors.property};
+    font-weight: bold;
+`
 
-    detailsButtonText: {
-        color: '#e02041',
-        fontSize: 15,
-        fontWeight: 'bold'
-    }
-})
+export const IncidentValue = styled.Text`
+    margin-top: 8px;
+    font-size: 15px;
+    margin-bottom: 24px;
+    color: ${props => props.theme.colors.normalText};
+`
+
+export const DetailsButton = styled.TouchableOpacity`
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const DetailsButtonText = styled.Text`
+    color: #e02041;
+    font-size: 15px;
+    font-weight: bold
+`;
+
+export const ThemeView = styled.View`
+    width: 60px;
+    height: 20px;
+    background-color: #fff;
+    position: absolute;
+    right: 8px;
+    top: 24px;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    elevation: 3;
+`;
